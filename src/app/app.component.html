@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="menu box">
+
+    <nav>
+      <ul class="mainmenu">
+        <li><a routerLink="/">Domov</a></li>
+        <li><a routerLink="/raid">Nájazd</a></li>
+        <li><a routerLink="/quests">Úlohy</a></li>
+        <li><a routerLink="/market">Trhovisko</a></li>
+        <li><a routerLink="/about">O hre</a></li>
+        <li>
+          <label> Language
+            <select (change)="updateLanguage($event)">
+              <option value="sk">Slovensky</option>
+              <option value="en">English</option>
+              <option value="de">Deutsch</option>
+            </select>
+          </label>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="game">
+    <router-outlet></router-outlet>
+  </div>
+
+  <small id="version">Verzia 0.0.1</small>
+</div>

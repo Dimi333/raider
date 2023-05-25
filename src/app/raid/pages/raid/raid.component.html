@@ -1,0 +1,18 @@
+<div style="display: flex; width: calc(100vw - 60px)" *ngIf="chosenRaid$ | async">
+  <div style="width: 70%; height: 60vh">
+    <app-mobile *ngFor="let mob of displayMobs | filterBy:'1' | orderById:'Id';" [mob]="mob"></app-mobile>
+    <br style="clear: left">
+    <hr>
+    <app-mobile *ngFor="let mob of displayMobs | filterBy:'2' | orderById:'Id';" [mob]="mob"></app-mobile>
+    <br style="clear: left">
+    <hr>
+
+    <button (click)="nextBattle()" [disabled]="battler?.BattleInProgress" style="padding: 10px; font-size: 3em">ďalšia
+      miestnosť
+    </button>
+  </div>
+
+  <div class="box" style="width: 30%; height: 70vh; overflow: scroll">
+    <div [innerHTML]="JournalService.gameJournal"></div>
+  </div>
+</div>

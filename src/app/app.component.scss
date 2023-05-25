@@ -1,0 +1,41 @@
+.container {
+  margin: 15px;
+  height: calc(100vh - 30px);
+  width: calc(100vw - 30px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0 0;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "menu menu menu menu menu"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game"
+    "game game game game game";
+}
+
+.menu {
+  grid-area: menu;
+  height: 30px
+}
+
+.panel {
+  grid-area: panel;
+  overflow-y: scroll;
+}
+
+.game {
+  grid-area: game;
+}
+
+#version {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

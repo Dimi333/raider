@@ -1,0 +1,23 @@
+.box {
+  position: relative;
+}
+.lifeprogress {
+  position: absolute;
+  background: red;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0
+}
+
+.lifeNumbers {
+  position: relative;
+  z-index: 2;
+  font-size: small;
+}
+
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

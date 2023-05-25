@@ -1,0 +1,23 @@
+{
+  "NAV": {
+    "HOME": "Dedina",
+    "RAID": "Nájazd!",
+    "QUESTS": "Úlohy",
+    "MARKET": "Market",
+    "ABOUT": "O aplikácii"
+  },
+  "HOME": {
+    "PAGE_FROM": "This is from ",
+    "OPEN_DIALOG": "Open Dialog"
+  },
+  "RAID": {
+  },
+  "QUESTS": {
+  },
+  "MARKET": {
+  },
+  "ABOUT": {
+    "PAGE_FROM": "This is from ",
+    "TYPE_INTO_BOX_NOTICE": "Type into the box and receive a Greet!"
+  }
+}
