@@ -8,8 +8,8 @@ describe('MarketComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MarketComponent ]
-    })
+    imports: [MarketComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(MarketComponent);

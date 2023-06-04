@@ -46,7 +46,6 @@ export class Battler {
           });
         }
 
-
         team1 = this.mobs.filter(mob => mob.Group === 1 && mob.IsAlive).length;
         team2 = this.mobs.filter(mob => mob.Group === 2 && mob.IsAlive).length;
         if (round === this._maxRounds || (team1 === 0 || team2 === 0)) {

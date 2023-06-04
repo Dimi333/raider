@@ -3,6 +3,13 @@ import {K6, K6plus, K8, Occupation, Race} from "./utils";
 import {ISkill} from "./skill";
 
 export class MobileObject {
+  get Band(): string {
+    return this._Band;
+  }
+
+  set Band(value: string) {
+    this._Band = value;
+  }
   set LootMoney(value: number) {
     this._LootMoney = value;
   }
@@ -111,6 +118,7 @@ export class MobileObject {
   private _Skill: string
   public _Money: number = 0
   private _LootMoney: number = 10
+  private _Band: string
 
   constructor(
     Id: string,
@@ -135,7 +143,7 @@ export class MobileObject {
     XP: number,
     Age: number,
     Skill: string,
-  ) {
+    Band: string) {
     // todo nezabudnúť updatnúť toJSON() a tie ostatné veci
     this._Race = race
     this._Occupation = occupation
@@ -159,6 +167,7 @@ export class MobileObject {
     this._CHAR = CHAR
     this._Age = Age
     this._Skill = Skill
+    this._Band = Band
   }
 
   // dať všetko z contructor a pri loade vytvoriť nové classy podľa toho
@@ -186,7 +195,8 @@ export class MobileObject {
       int: this._INT,
       char: this._CHAR,
       age: this._Age,
-      skill: this._Skill
+      skill: this._Skill,
+      band: this._Band
     }
   }
 

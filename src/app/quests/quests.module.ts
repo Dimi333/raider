@@ -5,13 +5,11 @@ import {QuestsRoutingModule} from "./quests-routing.module";
 
 
 @NgModule({
-  declarations: [
-    QuestsComponent
-  ],
-  imports: [
-    CommonModule,
-    QuestsRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        QuestsRoutingModule,
+        QuestsComponent
+    ]
 })
 export class QuestsModule {
 }

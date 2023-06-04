@@ -10,7 +10,7 @@ const routes: Routes = [
     component: MapComponent
   },
   {
-    path: 'adventure/:id',
+    path: 'adventure/:id/:bandId',
     component: RaidComponent
   }
 ];

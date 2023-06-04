@@ -9,6 +9,7 @@ import {K10, K100, K6, Occupation, Race} from "./utils";
 export class HeroService {
   heroes: MobileObject[] = []
   money: number = 0
+  bands: {name: string, id: string, heroes: MobileObject[]}[] = []
 
   constructor() {
   }
@@ -35,7 +36,8 @@ export class HeroService {
     group: number,
     xp: number,
     age: number,
-    skill: string
+    skill: string,
+    band: string
   }): MobileObject {
     const {
       id,
@@ -59,19 +61,20 @@ export class HeroService {
       group,
       xp,
       age,
-      skill
+      skill,
+      band
     } = recipe
-    return new MobileObject(id, name, race, occupation, image, item, item2, level, uc, oc, z, maxz, str, dex, con, int, char, mana, group, xp, age, skill)
+    return new MobileObject(id, name, race, occupation, image, item, item2, level, uc, oc, z, maxz, str, dex, con, int, char, mana, group, xp, age, skill, band)
   }
 
   getEnemy(level: number) {
     const z = (level * K6()) + 7 + level
-    return new MobileObject(uuidv4(), 'Škrat', 'skrat', 'warrior', this.getEnemyImage(), this.getItem(), this.getItem(), level, 1 + level + K6(), -1 + K6() + level, z, z, 10, 10, 10, 10, 10, 0, 2, 17 + (level * K10() + level), 20, '')
+    return new MobileObject(uuidv4(), 'Škrat', 'skrat', 'warrior', this.getEnemyImage(), this.getItem(), this.getItem(), level, 1 + level + K6(), -1 + K6() + level, z, z, 10, 10, 10, 10, 10, 0, 2, 17 + (level * K10() + level), 20, '', '')
   }
 
   getHero() {
     const z = 47 + K6()
-    return new MobileObject(uuidv4(), this.getName(), 'human', 'warrior', this.getImage(), this.getItem(), this.getItem(), 1, 3 + K6(), 2 + K6(), z, z, 10, 10, 10, 10, 10, 0, 1, 0, 20, K100() < 20 ? 'HealingSkill' : '')
+    return new MobileObject(uuidv4(), this.getName(), 'human', 'warrior', this.getImage(), this.getItem(), this.getItem(), 1, 3 + K6(), 2 + K6(), z, z, 10, 10, 10, 10, 10, 0, 1, 0, 20, K100() < 20 ? 'HealingSkill' : '', '')
   }
 
   addHeroToHeroes() {

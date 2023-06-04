@@ -5,8 +5,7 @@ html {
 }
 
 body {
-  background: #1f1f1f url("assets/img/trolliastrmina.png") no-repeat center center fixed;
-  background-size: cover;
+  background: #1f1f1f;
   color: #fff6e5;
   font-size: 16px;
   font-family: arial, sans-serif;
@@ -25,8 +24,8 @@ body {
   background: rgba(0, 0, 0, .4);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 15px;
+  border-radius: 5px;
+  padding: 2px;
   transition: background .1s;
 }
 
@@ -38,9 +37,9 @@ body {
   background: #1f1f1f;
   display: inline-block;
   border-radius: 5px;
-  padding: 3px 5px;
-  margin: 2px;
-  min-height: 25px;
+  padding: 1px 3px;
+  margin: 1px;
+  font-size: 0.9rem;
 
   &.offset30 {margin-left: 30px;}
 
@@ -51,15 +50,11 @@ body {
 .mainmenu {
   margin: 0;
   padding: 0;
-  font-size: 2em;
+  font-size: 1em;
 
   li {
     display: inline-block;
     margin-right: 10px;
-
-    a {
-      color: whitesmoke;
-    }
   }
 }
 

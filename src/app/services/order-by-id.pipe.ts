@@ -2,7 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {MobileObject} from "./MobileObject.class";
 
 @Pipe({
-  name: 'orderById'
+    name: 'orderById',
+    standalone: true
 })
 export class OrderByIdPipe implements PipeTransform {
   transform(value: any, field: string): MobileObject[] {

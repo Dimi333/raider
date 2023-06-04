@@ -3,11 +3,14 @@ import {MobileObject} from "../../services/MobileObject.class";
 import {K6} from "../../services/utils";
 import {HeroService} from "../../services/hero.service";
 import {ActivatedRoute} from "@angular/router";
+import { NgIf, NgStyle, NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'app-mobile',
-  templateUrl: './mobile.component.html',
-  styleUrls: ['./mobile.component.scss']
+    selector: 'app-mobile',
+    templateUrl: './mobile.component.html',
+    styleUrls: ['./mobile.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgStyle, NgOptimizedImage]
 })
 export class MobileComponent {
   @Output() useSkill: EventEmitter<string> = new EventEmitter();

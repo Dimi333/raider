@@ -1,11 +1,15 @@
 import {Component} from '@angular/core';
 import {HeroService} from "../../../services/hero.service";
 import {MobileObject} from "../../../services/MobileObject.class";
+import { MobileComponent } from '../../../shared/mobile/mobile.component';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-market',
-  templateUrl: './market.component.html',
-  styleUrls: ['./market.component.scss']
+    selector: 'app-market',
+    templateUrl: './market.component.html',
+    styleUrls: ['./market.component.scss'],
+    standalone: true,
+    imports: [NgFor, MobileComponent]
 })
 export class MarketComponent {
   showCase: MobileObject[] = []

@@ -8,8 +8,8 @@ describe('RaidComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RaidComponent ]
-    })
+    imports: [RaidComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(RaidComponent);
