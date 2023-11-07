@@ -53,7 +53,7 @@ import { Component } from '@angular/core';
         display: block;
         overflow: auto;
         height: 100%;
-        background: #1f1f1f url("./../../../../assets/img/backgrounds/trolliastrmina.png") no-repeat center center fixed;
+        background: #1f1f1f url("./../../assets/img/backgrounds/trolliastrmina.png") no-repeat center center fixed;
       }
     `],
     standalone: true

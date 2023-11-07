@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {HeroService} from "../../../services/hero.service";
-import {MobileObject} from "../../../services/MobileObject.class";
-import {MobileComponent} from '../../../shared/mobile/mobile.component';
+import {HeroService} from "../services/hero.service";
+import {MobileObject} from "../services/MobileObject.class";
+import {MobileComponent} from '../shared/mobile/mobile.component';
 import {NgFor} from '@angular/common';
 
 @Component({
@@ -17,7 +17,7 @@ import {NgFor} from '@angular/common';
       display: block;
       height: 100%;
       overflow: auto;
-      background: #1f1f1f url("./../../../../assets/img/backgrounds/Daln.png") no-repeat center center fixed;
+      background: #1f1f1f url("./../../assets/img/backgrounds/Daln.png") no-repeat center center fixed;
     }
   `],
   standalone: true,

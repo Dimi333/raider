@@ -1,11 +1,11 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {MobileObject} from "../../../services/MobileObject.class";
-import {HeroService} from "../../../services/hero.service";
-import {K6, Occupation, Race} from "../../../services/utils";
-import {MobileComponent} from '../../../shared/mobile/mobile.component';
-import {formatCurrency, JsonPipe, NgFor, NgIf, NgOptimizedImage} from '@angular/common';
-import {FilterByGroupPipe} from "../../../services/filter-by-group.pipe";
-import {FilterByBandPipe} from "../../../services/filter-by-band.pipe";
+import {MobileObject} from "../services/MobileObject.class";
+import {HeroService} from "../services/hero.service";
+import {K6} from "../services/utils";
+import {MobileComponent} from '../shared/mobile/mobile.component';
+import {JsonPipe, NgFor, NgIf, NgOptimizedImage} from '@angular/common';
+import {FilterByGroupPipe} from "../services/filter-by-group.pipe";
+import {FilterByBandPipe} from "../services/filter-by-band.pipe";
 
 export function userTrackBy(index: number, user: MobileObject) {
   return user.Id;
@@ -49,7 +49,7 @@ export const uuidv4 = () => {
       display: block;
       height: 100%;
       overflow: auto;
-      background: #1f1f1f url("./../../../../assets/img/backgrounds/ToraskovaPevnost.png") no-repeat center center fixed;
+      background: #1f1f1f url("./../../assets/img/backgrounds/ToraskovaPevnost.png") no-repeat center center fixed;
     }
   `],
   standalone: true,

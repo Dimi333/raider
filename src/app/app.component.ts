@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  Inject,
   inject,
   OnInit,
   TemplateRef,
@@ -15,7 +14,7 @@ import {HeroService} from "./services/hero.service";
 import {MobileObject} from "./services/MobileObject.class";
 import {Occupation, Race} from "./services/utils";
 import { Portal, TemplatePortal, PortalModule } from "@angular/cdk/portal";
-import {uuidv4} from "./home/pages/home/home.component";
+import {uuidv4} from "./home/home.component";
 import { Router, RouterOutlet, RouterLink } from "@angular/router";
 import {PlatformLocation} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";

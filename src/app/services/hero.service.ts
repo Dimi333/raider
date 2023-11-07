@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MobileObject} from "./MobileObject.class";
-import {uuidv4} from "../home/pages/home/home.component";
+import {uuidv4} from "../home/home.component";
 import {K10, K100, K6, Occupation, Race} from "./utils";
 
 @Injectable({
