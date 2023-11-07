@@ -8,8 +8,8 @@ describe('GetValueDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GetValueDialogComponent]
-    });
+    imports: [GetValueDialogComponent]
+});
     fixture = TestBed.createComponent(GetValueDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

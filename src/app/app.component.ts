@@ -14,17 +14,17 @@ import {JournalService} from "./services/journal.service";
 import {HeroService} from "./services/hero.service";
 import {MobileObject} from "./services/MobileObject.class";
 import {Occupation, Race} from "./services/utils";
-import {Portal, TemplatePortal} from "@angular/cdk/portal";
+import { Portal, TemplatePortal, PortalModule } from "@angular/cdk/portal";
 import {uuidv4} from "./home/pages/home/home.component";
-import {Router} from "@angular/router";
+import { Router, RouterOutlet, RouterLink } from "@angular/router";
 import {PlatformLocation} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {GetValueDialogComponent} from "./shared/get-value-dialog/get-value-dialog.component";
 
 
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
       <div class="container">
           <div class="game">
               <router-outlet></router-outlet>
@@ -70,7 +70,7 @@ import {GetValueDialogComponent} from "./shared/get-value-dialog/get-value-dialo
           <small id="version">Verzia 0.0.2</small>
       </div>
   `,
-  styles: [`
+    styles: [`
     .container {
       display: grid;
       height: calc(100vh - 20px);
@@ -130,6 +130,12 @@ import {GetValueDialogComponent} from "./shared/get-value-dialog/get-value-dialo
       font-size: 10px;
     }
   `],
+    standalone: true,
+    imports: [
+        RouterOutlet,
+        RouterLink,
+        PortalModule,
+    ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('templatePortalContentRaid') templatePortalContentRaid!: TemplateRef<unknown>;
