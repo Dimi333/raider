@@ -15,8 +15,31 @@ import {FilterByBandPipe} from "../../../services/filter-by-band.pipe";
 
 @Component({
   selector: 'app-raid',
-  templateUrl: './raid.component.html',
-  styleUrls: ['./raid.component.scss'],
+  template: `
+      <div class="canvas">
+          <div *ngIf="chosenRaid$ | async">
+              <div style="width: 90vw; ">
+                  <app-mobile *ngFor="let mob of displayMobs | filterByGroup:'1' | orderById:'Id';"
+                              [mob]="mob"></app-mobile>
+                  <br class="clearer">
+                  <app-mobile *ngFor="let mob of displayMobs | filterByGroup:'2' | orderById:'Id';"
+                              [mob]="mob"></app-mobile>
+                  <br class="clearer">
+                  <button [hidden]="battler?.BattleInProgress" style="padding: 10px; font-size: 3em">
+                      Ďalšia miestnosť
+                  </button>
+              </div>
+          </div>
+      </div>
+  `,
+  styles: [`
+    :host {
+      display: block;
+      height: 100%;
+      overflow: auto;
+      background: #1f1f1f url("./../../../../assets/img/backgrounds/les víl.png") no-repeat center center fixed;
+    }
+  `],
   standalone: true,
   imports: [NgIf, NgFor, MobileComponent, AsyncPipe, OrderByIdPipe, FilterByGroupPipe],
   providers: [FilterByBandPipe]

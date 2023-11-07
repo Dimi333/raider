@@ -3,8 +3,66 @@ import { Router, RouterLink } from "@angular/router";
 
 @Component({
     selector: 'app-map',
-    templateUrl: './map.component.html',
-    styleUrls: ['./map.component.scss'],
+    template: `
+        <div class="canvas">
+            <div class="box">
+                <p>Zvoľ si nájazd (náročnosť): (aby si mohol ísť na nájazd, potrebuješ mať vytvorenú aspoň 1 skupinu
+                    dobrodruhov)</p>
+                <table class="maptable">
+                    <tr>
+                        <td>
+                            <div class="">Žltý močiar (1)
+                                <button routerLink="adventure/1/0">Vyslať</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="">Okolie Dalnu (3)
+                                <button routerLink="adventure/3/0">Vyslať</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="">Hory počiatku (4)
+                                <button routerLink="adventure/4/0">Vyslať</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="">Čierne hory (5)
+                                <button routerLink="adventure/5/0">Vyslať</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="">Pútnikov hvozd (10)
+                                <button routerLink="adventure/10/0">Vyslať</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="">Tumno (24)
+                                <button routerLink="adventure/24/0">Vyslať</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    `,
+    styles: [`
+      :host {
+        display: block;
+        height: 100%;
+        overflow: auto;
+        background: #1f1f1f url("./../../../../assets/img/backgrounds/trolliastrmina.png") no-repeat center center fixed;
+      }
+
+      .maptable {
+        width: 100%;
+
+        td {
+          height: 4em;
+        }
+      }
+    `],
     standalone: true,
     imports: [RouterLink]
 })
