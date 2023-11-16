@@ -22,19 +22,20 @@ export const uuidv4 = () => {
   selector: 'app-home',
   template: `
       <div class="canvas" style="width: 95vw">
-          <div class="box" style="border: 10px groove darkgoldenrod; background: #261305; "
-               *ngFor="let band of heroService.bands">
-              {{band.name}}
-              <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
-              <br class="clearer">
+          @for (band of heroService.bands; track band.name) {
+          <div class="box" style="border: 10px groove darkgoldenrod; background: #261305;">
+          {{band.name}}
+          <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
+          <br class="clearer">
 
-              <app-mobile (click)="targetFunc(mob)"
-                          *ngFor="let mob of heroService.heroes|filterByBand:band.id; trackBy: userTrackBy;"
-                          [mob]="mob"
-                          (useSkill)="useSkill(mob, $event)"></app-mobile>
-              <br class="clearer">
-              <br class="clearer">
-          </div>
+          <app-mobile (click)="targetFunc(mob)"
+                      *ngFor="let mob of heroService.heroes|filterByBand:band.id; trackBy: userTrackBy;"
+                      [mob]="mob"
+                      (useSkill)="useSkill(mob, $event)"></app-mobile>
+          <br class="clearer">
+          <br class="clearer">
+            </div>
+          }
           <div>
               <app-mobile (click)="targetFunc(mob)" *ngFor="let mob of heroService.heroes; trackBy: userTrackBy;"
                           [mob]="mob"

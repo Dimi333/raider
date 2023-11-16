@@ -3,7 +3,7 @@ import {MobileObject} from "../../../services/MobileObject.class";
 import {Battler} from "../../../services/Battler.class";
 import {HeroService} from "../../../services/hero.service";
 import {JournalService} from "../../../services/journal.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {map} from "rxjs/operators";
 import {Observable} from 'rxjs';
 import {K6} from "../../../services/utils";
@@ -50,6 +50,7 @@ export class RaidComponent implements OnDestroy, OnInit {
   battler: Battler | null
   heroService = inject(HeroService)
   route = inject(ActivatedRoute)
+  router = inject(Router);
   public chosenBandId: string | undefined
   public chosenRaid$: Observable<any>
   public chosenRaid: number | undefined
@@ -61,6 +62,8 @@ export class RaidComponent implements OnDestroy, OnInit {
 
       if (chosenBand) {
         this.chosenBandId = this.heroService.bands[+chosenBand - 1].id
+      } else {
+        this.router.navigateByUrl('raid');
       }
 
       this.chosenRaid = +qp['id'];
