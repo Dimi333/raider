@@ -1,13 +1,13 @@
 import {K10} from "./utils";
 import {MobileObject} from "./MobileObject.class";
 
-export interface ISkill {
+export type Skill = {
   Name: string;
   Level: number;
   manipulate: Function;
 }
 
-export class HealingSkill implements ISkill {
+export class HealingSkill implements Skill {
   Level: number;
   Name = 'Healing skill';
 

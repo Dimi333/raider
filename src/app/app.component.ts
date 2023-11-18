@@ -10,11 +10,10 @@ import {
 
 import {DialogService} from "./home/services/dialog.service";
 import {JournalService} from "./services/journal.service";
-import {HeroService} from "./services/hero.service";
+import {HeroService, uuidv4} from "./services/hero.service";
 import {MobileObject} from "./services/MobileObject.class";
 import {Occupation, Race} from "./services/utils";
 import { Portal, TemplatePortal, PortalModule } from "@angular/cdk/portal";
-import {uuidv4} from "./home/home.component";
 import { Router, RouterOutlet, RouterLink } from "@angular/router";
 import {PlatformLocation} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";

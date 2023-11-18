@@ -12,31 +12,28 @@ import {OrderByIdPipe} from '../../../services/order-by-id.pipe';
 import {MobileComponent} from '../../../shared/mobile/mobile.component';
 import { AsyncPipe } from '@angular/common';
 import {FilterByBandPipe} from "../../../services/filter-by-band.pipe";
+import {ListOfSkillsComponent} from "../../../shared/list-of-skills/list-of-skills.component";
+import {ListOfHeroesComponent} from "../../../shared/list-of-heroes/list-of-heroes.component";
 
 @Component({
   selector: 'app-raid',
   template: `
       <div class="canvas">
           @if (chosenRaid$ | async) {
-          <div>
-                        <div style="width: 90vw; ">
-                            @for (mob of displayMobs | filterByGroup:'1' | orderById:'Id';; track mob) {
-          <app-mobile
-                  [mob]="mob"></app-mobile>
-          }
-          <br class="clearer">
-          @for (mob of displayMobs | filterByGroup:'2' | orderById:'Id';; track mob) {
-          <app-mobile
-                  [mob]="mob"></app-mobile>
-          }
-          <br class="clearer">
-          <button [hidden]="battler?.BattleInProgress" style="padding: 10px; font-size: 3em">
-              Ďalšia miestnosť
-          </button>
-      </div>
-  </div>
+            <div>
+                <div style="width: 90vw; height: 67vh; display: flex; flex-direction: column; align-items: center; justify-content: center">
+                  <app-list-of-heroes [heroes]="displayMobs | filterByGroup:'2' | orderById:'Id'" (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
+                  <br class="clearer">
+                  <app-list-of-heroes [heroes]="displayMobs | filterByGroup:'1' | orderById:'Id'" (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
+                  <br class="clearer">
+                  <button [hidden]="battler?.BattleInProgress" (click)="nextBattle()" style="padding: 10px; font-size: 3em">
+                      Ďalšia miestnosť
+                  </button>
+                </div>
+            </div>
           }
       </div>
+      <app-list-of-skills (usingSkill)="useSkill($event)"></app-list-of-skills>
   `,
   styles: [`
     :host {
@@ -47,7 +44,7 @@ import {FilterByBandPipe} from "../../../services/filter-by-band.pipe";
     }
   `],
   standalone: true,
-  imports: [MobileComponent, AsyncPipe, OrderByIdPipe, FilterByGroupPipe],
+  imports: [MobileComponent, AsyncPipe, OrderByIdPipe, FilterByGroupPipe, ListOfSkillsComponent, ListOfHeroesComponent],
   providers: [FilterByBandPipe]
 })
 export class RaidComponent implements OnDestroy, OnInit {
@@ -61,6 +58,8 @@ export class RaidComponent implements OnDestroy, OnInit {
   public chosenRaid$: Observable<any>
   public chosenRaid: number | undefined
   public inter: any = null;
+  skillWaiting: any
+  target: MobileObject | undefined
 
   constructor() {
     this.chosenRaid$ = this.route.params.pipe(map(qp => {
@@ -87,6 +86,12 @@ export class RaidComponent implements OnDestroy, OnInit {
     clearInterval(this.inter)
   }
 
+  useSkill(skill: string) {
+    if (skill === 'HealingSkill') {
+      this.skillWaiting = 'heal'
+    }
+  }
+
   battle() {
     if (!this.chosenRaid) return
     // if (!this.chosenBandId) return
@@ -102,7 +107,15 @@ export class RaidComponent implements OnDestroy, OnInit {
     this.displayMobs = Array.from(this.mobs)
     this.battler?.Battle(this.mobs)
 
-    this.inter = setInterval(() => !this.battler?.BattleInProgress ? this.nextBattle() : null, 1000);
+    // this.inter = setInterval(() => !this.battler?.BattleInProgress ? this.nextBattle() : null, 1000);
+  }
+
+  targetFunc(mob: MobileObject) {
+    if (this.skillWaiting === 'heal' && mob.Z < mob.MaxZ) {
+      mob.HealMe(K6())
+    } else {
+      this.target = mob
+    }
   }
 
   nextBattle() {

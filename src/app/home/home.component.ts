@@ -6,48 +6,32 @@ import {MobileComponent} from '../shared/mobile/mobile.component';
 import { JsonPipe, NgOptimizedImage } from '@angular/common';
 import {FilterByGroupPipe} from "../services/filter-by-group.pipe";
 import {FilterByBandPipe} from "../services/filter-by-band.pipe";
-
-export function userTrackBy(index: number, user: MobileObject) {
-  return user.Id;
-}
-
-export const uuidv4 = () => {
-  // @ts-ignore
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-  );
-}
+import {ListOfHeroesComponent} from "../shared/list-of-heroes/list-of-heroes.component";
+import {ListOfSkillsComponent} from "../shared/list-of-skills/list-of-skills.component";
 
 @Component({
   selector: 'app-home',
   template: `
       <div class="canvas" style="width: 95vw">
-          @for (band of heroService.bands; track band.name) {
-          <div class="box" style="border: 10px groove darkgoldenrod; background: #261305;">
-          {{band.name}}
-          <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
-          <br class="clearer">
-
-          @for (mob of heroService.heroes|filterByBand:band.id; track userTrackBy($index, mob)) {
-          <app-mobile (click)="targetFunc(mob)"
-
-                      [mob]="mob"
-                      (useSkill)="useSkill(mob, $event)"></app-mobile>
-          }
-          <br class="clearer">
-          <br class="clearer">
-            </div>
-          }
-          <div>
-              @for (mob of heroService.heroes; track userTrackBy($index, mob)) {
-              <app-mobile (click)="targetFunc(mob)"
-                                      [mob]="mob"
-                                      (useSkill)="useSkill(mob, $event)">
-                          </app-mobile>
-              }
+            <button (click)="addBand()">Pridať skupinu +👥</button>
+            @for (band of heroService.bands; track band.name) {
+              <div class="box" style="border: 10px groove darkgoldenrod; background: #261305;">
+              {{band.name}}
+              <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
               <br class="clearer">
-          </div>
+
+              <app-list-of-heroes [heroes]="heroService.heroes | filterByBand: band.id" (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
+              <br class="clearer">
+              <br class="clearer">
+              </div>
+            }
+            <div>
+                <app-list-of-heroes [heroes]="heroService.heroes"></app-list-of-heroes>
+                <br class="clearer">
+            </div>
+
       </div>
+      <app-list-of-skills (usingSkill)="useSkill($event)"></app-list-of-skills>
   `,
   styles: [`
     :host {
@@ -58,7 +42,7 @@ export const uuidv4 = () => {
     }
   `],
   standalone: true,
-  imports: [MobileComponent, FilterByGroupPipe, FilterByBandPipe, JsonPipe, NgOptimizedImage]
+    imports: [MobileComponent, FilterByGroupPipe, FilterByBandPipe, JsonPipe, NgOptimizedImage, ListOfHeroesComponent, ListOfSkillsComponent]
 })
 export class HomeComponent implements OnDestroy, OnInit {
   target: MobileObject | undefined
@@ -75,14 +59,12 @@ export class HomeComponent implements OnDestroy, OnInit {
   ngOnInit() {
   }
 
-  protected readonly userTrackBy = userTrackBy
-
   heal(mob: MobileObject) {
     mob.HealMe(K6());
   }
 
-  useSkill(mob: MobileObject, skill: string) {
-    if (skill === 'heal') {
+  useSkill(skill: string) {
+    if (skill === 'HealingSkill') {
       this.skillWaiting = 'heal'
     }
   }
@@ -103,6 +85,14 @@ export class HomeComponent implements OnDestroy, OnInit {
 
       this.heroService.heroes[where].Band = band.id
       this.heroService.heroes = [...this.heroService.heroes]
+    }
+  }
+
+  addBand() {
+    let bandName = prompt("Pomenuj skupinu");
+
+    if (bandName) {
+      this.heroService.bands.push({id: ""+this.heroService.bands.length, name: bandName, heroes: []});
     }
   }
 }

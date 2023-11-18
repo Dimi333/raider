@@ -1,6 +1,6 @@
 import {JournalService} from "./journal.service";
 import {K6, K6plus, K8, Occupation, Race} from "./utils";
-import {ISkill} from "./skill";
+import {Skill} from "./skill";
 
 export class MobileObject {
   get Band(): string {
@@ -16,11 +16,11 @@ export class MobileObject {
   get LootMoney(): number {
     return this._LootMoney;
   }
-  get Skill(): string {
+  get Skill(): string | null {
     return this._Skill;
   }
 
-  set Skill(value: string) {
+  set Skill(value: string | null) {
     this._Skill = value;
   }
   get Mana(): number {
@@ -115,7 +115,7 @@ export class MobileObject {
   private _CON: number
   private _INT: number
   private _CHAR: number
-  private _Skill: string
+  private _Skill: string | null
   public _Money: number = 0
   private _LootMoney: number = 10
   private _Band: string
@@ -142,7 +142,7 @@ export class MobileObject {
     Group: number,
     XP: number,
     Age: number,
-    Skill: string,
+    Skill: string | null,
     Band: string) {
     // todo nezabudnúť updatnúť toJSON() a tie ostatné veci
     this._Race = race
@@ -204,7 +204,7 @@ export class MobileObject {
     this._Attack = K6plus() + this._UC;
   }
 
-  useSkill(skill: ISkill, target: MobileObject) {
+  useSkill(skill: Skill, target: MobileObject) {
     skill.manipulate(this, target)
   }
 

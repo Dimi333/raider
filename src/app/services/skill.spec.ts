@@ -1,6 +1,6 @@
-import { ISkill } from './skill';
+import { Skill } from './skill';
 
-class Skill implements ISkill{
+class Skill implements Skill{
   Level: number = 1;
   Name: string  = '';
   private _p0: any;
