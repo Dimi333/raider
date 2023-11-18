@@ -2,15 +2,17 @@ import {Component} from '@angular/core';
 import {HeroService} from "../services/hero.service";
 import {MobileObject} from "../services/MobileObject.class";
 import {MobileComponent} from '../shared/mobile/mobile.component';
-import {NgFor} from '@angular/common';
+
 
 @Component({
   selector: 'app-market',
   template: `
-    <div class="canvas">
-      <app-mobile *ngFor="let hero of showCase; let i = index" [mob]="hero" (click)="buyHero(hero, i)"></app-mobile>
-      <br class="clearer">
-    </div>
+      <div class="canvas">
+          @for (hero of showCase; track hero; let i = $index) {
+          <app-mobile [mob]="hero" (click)="buyHero(hero, i)"></app-mobile>
+          }
+          <br class="clearer">
+      </div>
   `,
   styles: [`
     :host {
@@ -21,7 +23,7 @@ import {NgFor} from '@angular/common';
     }
   `],
   standalone: true,
-  imports: [NgFor, MobileComponent]
+  imports: [MobileComponent]
 })
 export class MarketComponent {
   showCase: MobileObject[] = []

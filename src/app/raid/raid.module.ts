@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import {RaidRoutingModule} from './raid-routing.module';
 import {RaidComponent} from './pages/raid/raid.component';

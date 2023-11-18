@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 export interface DialogData {
   value: string;
@@ -8,19 +8,19 @@ export interface DialogData {
 }
 
 @Component({
-    selector: 'app-get-value-dialog',
-    template: `
-      <p>{{data.name}}</p>
-      <input type="text" [(ngModel)]="data.value"/>
-      <button (click)="useValue()">Použiť</button>
+  selector: 'app-get-value-dialog',
+  template: `
+    <p>{{data.name}}</p>
+    <input type="text" [(ngModel)]="data.value"/>
+    <button (click)="useValue()">Použiť</button>
   `,
-    styles: [`
+  styles: [`
     :host {
       color: black;
     }
   `],
-    standalone: true,
-    imports: [FormsModule]
+  standalone: true,
+  imports: [FormsModule]
 })
 export class GetValueDialogComponent {
   constructor(
@@ -28,6 +28,7 @@ export class GetValueDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
   }
+
   useValue() {
     this.dialogRef.close(this.data);
   }

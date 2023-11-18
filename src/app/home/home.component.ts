@@ -3,7 +3,7 @@ import {MobileObject} from "../services/MobileObject.class";
 import {HeroService} from "../services/hero.service";
 import {K6} from "../services/utils";
 import {MobileComponent} from '../shared/mobile/mobile.component';
-import {JsonPipe, NgFor, NgIf, NgOptimizedImage} from '@angular/common';
+import { JsonPipe, NgOptimizedImage } from '@angular/common';
 import {FilterByGroupPipe} from "../services/filter-by-group.pipe";
 import {FilterByBandPipe} from "../services/filter-by-band.pipe";
 
@@ -28,19 +28,23 @@ export const uuidv4 = () => {
           <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
           <br class="clearer">
 
+          @for (mob of heroService.heroes|filterByBand:band.id; track userTrackBy($index, mob)) {
           <app-mobile (click)="targetFunc(mob)"
-                      *ngFor="let mob of heroService.heroes|filterByBand:band.id; trackBy: userTrackBy;"
+
                       [mob]="mob"
                       (useSkill)="useSkill(mob, $event)"></app-mobile>
+          }
           <br class="clearer">
           <br class="clearer">
             </div>
           }
           <div>
-              <app-mobile (click)="targetFunc(mob)" *ngFor="let mob of heroService.heroes; trackBy: userTrackBy;"
-                          [mob]="mob"
-                          (useSkill)="useSkill(mob, $event)">
-              </app-mobile>
+              @for (mob of heroService.heroes; track userTrackBy($index, mob)) {
+              <app-mobile (click)="targetFunc(mob)"
+                                      [mob]="mob"
+                                      (useSkill)="useSkill(mob, $event)">
+                          </app-mobile>
+              }
               <br class="clearer">
           </div>
       </div>
@@ -54,7 +58,7 @@ export const uuidv4 = () => {
     }
   `],
   standalone: true,
-  imports: [NgFor, MobileComponent, FilterByGroupPipe, FilterByBandPipe, JsonPipe, NgIf, NgOptimizedImage]
+  imports: [MobileComponent, FilterByGroupPipe, FilterByBandPipe, JsonPipe, NgOptimizedImage]
 })
 export class HomeComponent implements OnDestroy, OnInit {
   target: MobileObject | undefined

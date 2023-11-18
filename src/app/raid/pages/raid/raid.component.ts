@@ -10,26 +10,32 @@ import {K6} from "../../../services/utils";
 import {FilterByGroupPipe} from '../../../services/filter-by-group.pipe';
 import {OrderByIdPipe} from '../../../services/order-by-id.pipe';
 import {MobileComponent} from '../../../shared/mobile/mobile.component';
-import {NgIf, NgFor, AsyncPipe} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {FilterByBandPipe} from "../../../services/filter-by-band.pipe";
 
 @Component({
   selector: 'app-raid',
   template: `
       <div class="canvas">
-          <div *ngIf="chosenRaid$ | async">
-              <div style="width: 90vw; ">
-                  <app-mobile *ngFor="let mob of displayMobs | filterByGroup:'1' | orderById:'Id';"
-                              [mob]="mob"></app-mobile>
-                  <br class="clearer">
-                  <app-mobile *ngFor="let mob of displayMobs | filterByGroup:'2' | orderById:'Id';"
-                              [mob]="mob"></app-mobile>
-                  <br class="clearer">
-                  <button [hidden]="battler?.BattleInProgress" style="padding: 10px; font-size: 3em">
-                      Ďalšia miestnosť
-                  </button>
-              </div>
-          </div>
+          @if (chosenRaid$ | async) {
+          <div>
+                        <div style="width: 90vw; ">
+                            @for (mob of displayMobs | filterByGroup:'1' | orderById:'Id';; track mob) {
+          <app-mobile
+                  [mob]="mob"></app-mobile>
+          }
+          <br class="clearer">
+          @for (mob of displayMobs | filterByGroup:'2' | orderById:'Id';; track mob) {
+          <app-mobile
+                  [mob]="mob"></app-mobile>
+          }
+          <br class="clearer">
+          <button [hidden]="battler?.BattleInProgress" style="padding: 10px; font-size: 3em">
+              Ďalšia miestnosť
+          </button>
+      </div>
+  </div>
+          }
       </div>
   `,
   styles: [`
@@ -41,7 +47,7 @@ import {FilterByBandPipe} from "../../../services/filter-by-band.pipe";
     }
   `],
   standalone: true,
-  imports: [NgIf, NgFor, MobileComponent, AsyncPipe, OrderByIdPipe, FilterByGroupPipe],
+  imports: [MobileComponent, AsyncPipe, OrderByIdPipe, FilterByGroupPipe],
   providers: [FilterByBandPipe]
 })
 export class RaidComponent implements OnDestroy, OnInit {

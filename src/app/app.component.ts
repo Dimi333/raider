@@ -131,10 +131,10 @@ import {GetValueDialogComponent} from "./shared/get-value-dialog/get-value-dialo
   `],
     standalone: true,
     imports: [
-        RouterOutlet,
-        RouterLink,
-        PortalModule,
-    ],
+    RouterOutlet,
+    RouterLink,
+    PortalModule
+],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('templatePortalContentRaid') templatePortalContentRaid!: TemplateRef<unknown>;
