@@ -70,10 +70,16 @@ export class RaidComponent implements OnDestroy, OnInit {
 
   constructor() {
     this.chosenRaid$ = this.route.params.pipe(map(qp => {
-      let chosenBand = prompt('Vyber skupinu:' + this.heroService.bands.reduce((accumulator, itemInArray, index) => accumulator + (index + 1) + ')' + itemInArray.name + '\n', ''))
+      // let chosenBand = prompt('Vyber skupinu:' + this.heroService.bands.reduce((accumulator, itemInArray, index) => accumulator + (index + 1) + ')' + itemInArray.name + '\n', ''))
+      let chosenBand = 1
+      if (this.heroService.bands[0].heroes.length === 0) {
+        alert("Treba mať hrdinov!")
+        this.router.navigateByUrl('market');
+
+      }
 
       if (chosenBand) {
-        this.chosenBandId = this.heroService.bands[+chosenBand - 1].id
+        this.chosenBandId = this.heroService.bands[0].id
       } else {
         this.router.navigateByUrl('raid');
       }

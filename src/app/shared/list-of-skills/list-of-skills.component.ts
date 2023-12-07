@@ -7,7 +7,7 @@ import {HeroService} from "../../services/hero.service";
   standalone: true,
   imports: [CommonModule],
   template: `
-      @for (skill of skills;let index = $index;track skill) {
+      @for (skill of skills;let index = $index; track skill) {
           @if (skill) {
               <button (click)="useSkill(skill)" [class]="{'selected': waitingSkill === skill}">
                   {{ GetCharacter(index) + " | " + skill }}
@@ -41,10 +41,14 @@ export class ListOfSkillsComponent {
 
   GetCharacter(index: number): string {
     switch (index) {
-      case 1:
+      case 0:
         return "Q";
-      case 2:
+      case 1:
         return "W";
+      case 2:
+        return "E";
+      case 3:
+        return "R";
       default:
         return ""
     }

@@ -8,6 +8,7 @@ import {FilterByGroupPipe} from "../services/filter-by-group.pipe";
 import {FilterByBandPipe} from "../services/filter-by-band.pipe";
 import {ListOfHeroesComponent} from "../shared/list-of-heroes/list-of-heroes.component";
 import {ListOfSkillsComponent} from "../shared/list-of-skills/list-of-skills.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -43,6 +44,7 @@ import {ListOfSkillsComponent} from "../shared/list-of-skills/list-of-skills.com
     imports: [MobileComponent, FilterByGroupPipe, FilterByBandPipe, JsonPipe, NgOptimizedImage, ListOfHeroesComponent, ListOfSkillsComponent]
 })
 export class HomeComponent implements OnDestroy, OnInit {
+  private _router: Router = inject(Router)
   target: MobileObject | undefined
   skillWaiting: any
   heroService = inject(HeroService)
@@ -76,14 +78,15 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   addHeroToBand(band: {name: string, id: string, heroes: any[]}) {
-    let chosenOne = prompt('Zvoľ hrdinu:\n' + this.heroService.heroes.reduce((accumulator, itemInArray, index) => accumulator + (index + 1) + ')' + itemInArray.Name + '\n', ''))
-
-    if (chosenOne) {
-      let where = Number.parseInt(chosenOne) - 1
-
-      this.heroService.heroes[where].Band = band.id
-      this.heroService.heroes = [...this.heroService.heroes]
-    }
+    this._router.navigateByUrl('market')
+    // let chosenOne = prompt('Zvoľ hrdinu:\n' + this.heroService.heroes.reduce((accumulator, itemInArray, index) => accumulator + (index + 1) + ')' + itemInArray.Name + '\n', ''))
+    //
+    // if (chosenOne) {
+    //   let where = Number.parseInt(chosenOne) - 1
+    //
+    //   this.heroService.heroes[where].Band = band.id
+    //   this.heroService.heroes = [...this.heroService.heroes]
+    // }
   }
 
   addBand() {
