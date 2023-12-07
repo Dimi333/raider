@@ -12,34 +12,41 @@ import { Router, RouterLink } from "@angular/router";
                     <tr>
                         <td>
                             <div class="">Žltý močiar (1)
-                                <button routerLink="adventure/1/0">Vyslať</button>
+                                <button routerLink="adventure/1/0/false">Vyslať</button>
                             </div>
                         </td>
                         <td>
                             <div class="">Okolie Dalnu (3)
-                                <button routerLink="adventure/3/0">Vyslať</button>
+                                <button routerLink="adventure/3/0/false">Vyslať</button>
                             </div>
                         </td>
                         <td>
                             <div class="">Hory počiatku (4)
-                                <button routerLink="adventure/4/0">Vyslať</button>
+                                <button routerLink="adventure/4/0/false">Vyslať</button>
                             </div>
                         </td>
                     </tr>
+                   <tr>
+                    <td colspan="3">
+                      <div class="">Boss 1
+                        <button routerLink="adventure/1/0/true">Vyslať</button>
+                      </div>
+                    </td>
+                  </tr>
                     <tr>
                         <td>
                             <div class="">Čierne hory (5)
-                                <button routerLink="adventure/5/0">Vyslať</button>
+                                <button routerLink="adventure/5/0/false">Vyslať</button>
                             </div>
                         </td>
                         <td>
                             <div class="">Pútnikov hvozd (10)
-                                <button routerLink="adventure/10/0">Vyslať</button>
+                                <button routerLink="adventure/10/0/false">Vyslať</button>
                             </div>
                         </td>
                         <td>
                             <div class="">Tumno (24)
-                                <button routerLink="adventure/24/0">Vyslať</button>
+                                <button routerLink="adventure/24/0/false">Vyslať</button>
                             </div>
                         </td>
                     </tr>

@@ -40,6 +40,7 @@ export class MarketComponent {
 
   buyHero(hero: MobileObject, index: number) {
     this.showCase.splice(index, 1)
+    hero.Band = this.hs.bands[0].id;
     this.hs.heroes.push(hero)
   }
 

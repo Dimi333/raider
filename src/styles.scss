@@ -60,13 +60,14 @@ body {
 }
 
 .canvas {
-  background: rgba(51, 25, 6, 0.39);
+  //background: rgba(51, 25, 6, 1);
   border-radius: 5px;
-  padding: 10px;
-  max-height: calc(100vh - 200px);
-  margin: 10px auto;
+  position: absolute;
+  padding: 0;
+  max-height: calc(100vh - 280px);
+  z-index: 2;
+  //margin: 50px;
   overflow: auto;
-  max-width: 95vw;
 }
 
 .clearer {

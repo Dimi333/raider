@@ -2,7 +2,6 @@ import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {MobileObject} from "../../services/MobileObject.class";
 import {K6} from "../../services/utils";
 import {HeroService} from "../../services/hero.service";
-import {ActivatedRoute} from "@angular/router";
 import { NgStyle, NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -11,7 +10,7 @@ import { NgStyle, NgOptimizedImage } from '@angular/common';
         @if (mob) {
         <div class="box mobile"
 
-        style="width: 170px; height: 190px; float: left; margin: 1px"
+        style="width: 170px; height: 220px; float: left; margin: 1px"
         [ngStyle]="{'opacity': mob.IsAlive ? 1 : .8, 'filter': mob.IsAlive ? 'none' : 'brightness(.1)'}">
         <button class="remove" (click)="removeHero()">❌</button>
         <small style="display: inline-block; overflow: hidden; height: 20px">{{mob.Name}} 👑: {{mob.Level}} |
@@ -19,12 +18,13 @@ import { NgStyle, NgOptimizedImage } from '@angular/common';
 
         <table>
         <tr>
-        <td><img ngSrc="assets/img/{{mob.Group === 1 ? 'avatars' : 'avatars-enemies'}}/{{mob.Image}}.png"
+        <td><img ngSrc="assets/img/{{mob.Group === 1 ? 'avatars' : 'avatars-enemies'}}/{{mob.Image}}.{{mob.Group === 1 ? 'png' : 'jpg'}}"
         alt=""
         width="110" height="110"/></td>
         <td><img ngSrc="assets/img/items/{{mob.Item}}.png" alt="" width="50" height="50"/> <img
         ngSrc="assets/img/items/{{mob.Item2}}.png" alt="" width="50" height="50"/></td>
         </tr>
+        <!-- zdravie -->
         <tr>
         <td colspan="2">
         <div
@@ -34,11 +34,24 @@ import { NgStyle, NgOptimizedImage } from '@angular/common';
         </div>
         </td>
         </tr>
+        <!-- mana -->
         <tr>
         <td colspan="2">
-        ⚔️{{mob.UC}} 🛡️{{mob.OC}} 🔵-
+        <div
+        style="border-radius: 5px; text-align: center; overflow: hidden; width: 100%; border: 1px solid white; background: blue; position: relative">
+        <div class="manaprogress" [ngStyle]="{'width': 100/mob.maxMana * mob.Mana + '%'}"></div>
+        <div class="lifeNumbers">{{mob.Mana}}/{{mob.maxMana}}</div>
+        </div>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+        ⚔️{{mob.UC}} 🛡️{{mob.OC}}
         @if (mob.Skill === 'HealingSkill') {
-        <button (click)="useSkillFunc('heal')">❤️</button>
+        <a href="#" (click)="useSkillFunc('heal')">❤️</a>
+        }
+        @if (mob.Skill === 'LightningSkill') {
+        <a href="#" (click)="useSkillFunc('lightning')">⚡️</a>
         }
         </td>
         </tr>
@@ -77,15 +90,13 @@ import { NgStyle, NgOptimizedImage } from '@angular/common';
     imports: [NgStyle, NgOptimizedImage]
 })
 export class MobileComponent {
-  @Output() useSkill: EventEmitter<string> = new EventEmitter();
+  private hs = inject(HeroService)
 
+  @Output() useSkill: EventEmitter<string> = new EventEmitter();
   @Input() mob!: MobileObject;
 
   protected readonly K6 = K6;
 
-  private hs = inject(HeroService)
-
-  private as = inject(ActivatedRoute)
 
   constructor() {
   }

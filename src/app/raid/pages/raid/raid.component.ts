@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, inject, OnDestroy, OnInit} from '@angular/core';
 import {MobileObject} from "../../../services/MobileObject.class";
 import {Battler} from "../../../services/Battler.class";
 import {HeroService} from "../../../services/hero.service";
@@ -21,7 +21,7 @@ import {ListOfHeroesComponent} from "../../../shared/list-of-heroes/list-of-hero
       <div class="canvas">
           @if (chosenRaid$ | async) {
             <div>
-                <div style="width: 90vw; height: 67vh; display: flex; flex-direction: column; align-items: center; justify-content: center">
+                <div style="width: 100vw; height: calc(100vh - 280px); display: flex; flex-direction: column; align-items: center; justify-content: center">
                   <app-list-of-heroes [heroes]="displayMobs | filterByGroup:'2' | orderById:'Id'" (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
                   <br class="clearer">
                   <app-list-of-heroes [heroes]="displayMobs | filterByGroup:'1' | orderById:'Id'" (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
@@ -33,14 +33,16 @@ import {ListOfHeroesComponent} from "../../../shared/list-of-heroes/list-of-hero
             </div>
           }
       </div>
-      <app-list-of-skills (usingSkill)="useSkill($event)"></app-list-of-skills>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 90vw; height: 100px">
+        <app-list-of-skills (usingSkill)="useSkill($event)"></app-list-of-skills>
+      </div>
   `,
   styles: [`
     :host {
       display: block;
       height: 100%;
       overflow: auto;
-      background: #1f1f1f url("./../../../../assets/img/backgrounds/les víl.png") no-repeat center center fixed;
+      background: #1f1f1f url("./../../../../assets/img/backgrounds/raidwow.jpg") no-repeat center center fixed;
     }
   `],
   standalone: true,
@@ -61,6 +63,11 @@ export class RaidComponent implements OnDestroy, OnInit {
   skillWaiting: any
   target: MobileObject | undefined
 
+  @HostListener('window:keydown.SPACE', ['$event'])
+  next(event: KeyboardEvent) {
+    this.nextBattle();
+  }
+
   constructor() {
     this.chosenRaid$ = this.route.params.pipe(map(qp => {
       let chosenBand = prompt('Vyber skupinu:' + this.heroService.bands.reduce((accumulator, itemInArray, index) => accumulator + (index + 1) + ')' + itemInArray.name + '\n', ''))
@@ -72,7 +79,7 @@ export class RaidComponent implements OnDestroy, OnInit {
       }
 
       this.chosenRaid = +qp['id'];
-      this.battle();
+      this.battle(qp['boss']);
       return qp['id']
     }))
     this.battler = null;
@@ -87,20 +94,22 @@ export class RaidComponent implements OnDestroy, OnInit {
   }
 
   useSkill(skill: string) {
-    if (skill === 'HealingSkill') {
-      this.skillWaiting = 'heal'
-    }
+    this.skillWaiting = skill
   }
 
-  battle() {
+  battle(boss?: string) {
     if (!this.chosenRaid) return
     // if (!this.chosenBandId) return
     this.mobs = this.mobs.filter(mob => mob.IsAlive)
     this.mobs.push(...this.heroService.heroes.filter(hero => hero.Band === this.chosenBandId))
     let count = K6()
 
-    for (let i = 0; i < count; i++) {
-      this.mobs.push(this.heroService.getEnemy(this.chosenRaid))
+    if (boss === 'false') {
+      for (let i = 0; i < count; i++) {
+        this.mobs.push(this.heroService.getEnemy(this.chosenRaid))
+      }
+    } else {
+      this.mobs.push(this.heroService.getBoss())
     }
 
     JournalService.resetLog()
@@ -111,8 +120,10 @@ export class RaidComponent implements OnDestroy, OnInit {
   }
 
   targetFunc(mob: MobileObject) {
-    if (this.skillWaiting === 'heal' && mob.Z < mob.MaxZ) {
+    if (this.skillWaiting === 'HealingSkill' && mob.Z < mob.MaxZ) {
       mob.HealMe(K6())
+    } else if (this.skillWaiting === "LightningSkill") {
+      mob.DamageMe(K6() + K6())
     } else {
       this.target = mob
     }

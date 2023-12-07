@@ -12,8 +12,10 @@ import {ListOfSkillsComponent} from "../shared/list-of-skills/list-of-skills.com
 @Component({
   selector: 'app-home',
   template: `
-      <div class="canvas" style="width: 95vw">
+      <div class="canvas">
+            <div>
             <button (click)="addBand()">Pridať skupinu +👥</button>
+            </div>
             @for (band of heroService.bands; track band.name) {
               <div class="box" style="border: 10px groove darkgoldenrod; background: #261305;">
               {{band.name}}
@@ -25,10 +27,6 @@ import {ListOfSkillsComponent} from "../shared/list-of-skills/list-of-skills.com
               <br class="clearer">
               </div>
             }
-            <div>
-                <app-list-of-heroes [heroes]="heroService.heroes"></app-list-of-heroes>
-                <br class="clearer">
-            </div>
 
       </div>
       <app-list-of-skills (usingSkill)="useSkill($event)"></app-list-of-skills>
@@ -38,7 +36,7 @@ import {ListOfSkillsComponent} from "../shared/list-of-skills/list-of-skills.com
       display: block;
       height: 100%;
       overflow: auto;
-      background: #1f1f1f url("./../../assets/img/backgrounds/ToraskovaPevnost.png") no-repeat center center fixed;
+      z-index: 2;
     }
   `],
   standalone: true,
@@ -64,14 +62,14 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   useSkill(skill: string) {
-    if (skill === 'HealingSkill') {
-      this.skillWaiting = 'heal'
-    }
+    this.skillWaiting = skill
   }
 
   targetFunc(mob: MobileObject) {
-    if (this.skillWaiting === 'heal' && mob.Z < mob.MaxZ) {
+    if (this.skillWaiting === 'HealingSkill' && mob.Z < mob.MaxZ) {
       mob.HealMe(K6())
+    } else if (this.skillWaiting === "LightningSkill") {
+      mob.DamageMe(K6() + K6())
     } else {
       this.target = mob
     }

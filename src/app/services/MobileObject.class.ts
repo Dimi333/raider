@@ -3,6 +3,37 @@ import {K6, K6plus, K8, Occupation, Race} from "./utils";
 import {Skill} from "./skill";
 
 export class MobileObject {
+  private readonly _Name: string
+  private readonly _Id: string
+  private readonly _Image: string
+  private _Item2: string
+  private _Item: string
+  private _Level: number
+  private _UC: number
+  private _OC: number
+  private _Z: number
+  private _Mana: number
+  private _MaxMana: number
+  private _Group: number
+  private _Initiative: number = 0
+  private _XP: number
+  private _Defense: number = 0
+  private _Attack: number = 0
+  private _IsAlive: boolean = true
+  private _MaxZ: number = 0
+  private _Age: number = 20
+  private _Race: Race;
+  private _Occupation: Occupation = 'warrior'
+  private _STR: number
+  private _DEX: number
+  private _CON: number
+  private _INT: number
+  private _CHAR: number
+  private _Skill: string | null
+  public _Money: number = 0
+  private _LootMoney: number = 10
+  private _Band: string
+
   get Band(): string {
     return this._Band;
   }
@@ -10,12 +41,15 @@ export class MobileObject {
   set Band(value: string) {
     this._Band = value;
   }
+
   set LootMoney(value: number) {
     this._LootMoney = value;
   }
+
   get LootMoney(): number {
     return this._LootMoney;
   }
+
   get Skill(): string | null {
     return this._Skill;
   }
@@ -23,12 +57,21 @@ export class MobileObject {
   set Skill(value: string | null) {
     this._Skill = value;
   }
+
   get Mana(): number {
     return this._Mana;
   }
 
   set Mana(value: number) {
     this._Mana = value
+  }
+
+  get maxMana(): number {
+    return this._MaxMana;
+  }
+
+  set maxMana(value: number) {
+    this._MaxMana = value;
   }
 
   get Item2(): string {
@@ -90,36 +133,6 @@ export class MobileObject {
     return this._Name
   }
 
-  private readonly _Name: string
-  private readonly _Id: string
-  private readonly _Image: string
-  private _Item2: string
-  private _Item: string
-  private _Level: number
-  private _UC: number
-  private _OC: number
-  private _Z: number
-  private _Mana: number
-  private _Group: number
-  private _Initiative: number = 0
-  private _XP: number
-  private _Defense: number = 0
-  private _Attack: number = 0
-  private _IsAlive: boolean = true
-  private _MaxZ: number = 0
-  private _Age: number = 20
-  private _Race: Race;
-  private _Occupation: Occupation = 'warrior'
-  private _STR: number
-  private _DEX: number
-  private _CON: number
-  private _INT: number
-  private _CHAR: number
-  private _Skill: string | null
-  public _Money: number = 0
-  private _LootMoney: number = 10
-  private _Band: string
-
   constructor(
     Id: string,
     name: string,
@@ -139,6 +152,7 @@ export class MobileObject {
     INT: number,
     CHAR: number,
     Mana: number,
+    MaxMana: number,
     Group: number,
     XP: number,
     Age: number,
@@ -154,6 +168,7 @@ export class MobileObject {
     this._UC = UC
     this._Z = Z
     this._Mana = Mana
+    this._MaxMana = MaxMana
     this._MaxZ = MaxZ
     this._Group = Group
     this._Name = name
@@ -183,6 +198,7 @@ export class MobileObject {
       z: this._Z,
       maxz: this._MaxZ,
       mana: this._Mana,
+      maxMana: this._MaxMana,
       maxZ: this._MaxZ,
       group: this._Group,
       name: this._Name,

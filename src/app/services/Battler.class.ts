@@ -51,7 +51,12 @@ export class Battler {
         if (round === this._maxRounds || (team1 === 0 || team2 === 0)) {
           JournalService.log('➿➿➿➿➿➿➿➿➿')
           JournalService.log('Koniec súboja');
-          this.mobs.map(mob => {if (mob.Group === 2) {this._LootMoney += mob.LootMoney; mob.LootMoney = 0}})
+          this.mobs.map(mob => {
+            if (mob.Group === 2) {
+              this._LootMoney += mob.LootMoney;
+              mob.LootMoney = 0
+            }
+          })
           this.hs.money += this._LootMoney
           this.BattleInProgress = false;
           this.subscription?.unsubscribe();
