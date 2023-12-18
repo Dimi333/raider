@@ -14,20 +14,21 @@ import {Router} from "@angular/router";
   selector: 'app-home',
   template: `
       <div class="canvas">
-            <div>
-            <!--button (click)="addBand()">Pridať skupinu +👥</button-->
-            </div>
-            @for (band of heroService.bands; track band.name) {
-              <div class="box" style="border: 10px groove darkgoldenrod; background: #261305;">
-              {{band.name}}
-              <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
-              <br class="clearer">
+          <div>
+              <!--button (click)="addBand()">Pridať skupinu +👥</button-->
+          </div>
+          @for (band of heroService.bands;track band.name) {
+              <div class="box">
+                  {{ band.name }}
+                  <button (click)="addHeroToBand(band)">Pridať hrdinu +👥</button>
+                  <br class="clearer">
 
-              <app-list-of-heroes [heroes]="heroService.heroes | filterByBand: band.id" (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
-              <br class="clearer">
-              <br class="clearer">
+                  <app-list-of-heroes [heroes]="heroService.heroes | filterByBand: band.id"
+                                      (targetFuncEmitter)="targetFunc($event)"></app-list-of-heroes>
+                  <br class="clearer">
+                  <br class="clearer">
               </div>
-            }
+          }
 
       </div>
       <app-list-of-skills (usingSkill)="useSkill($event)"></app-list-of-skills>
