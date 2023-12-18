@@ -44,6 +44,14 @@ import {ListOfHeroesComponent} from "../../../shared/list-of-heroes/list-of-hero
       overflow: auto;
       background: #1f1f1f url("./../../../../assets/img/backgrounds/raidwow.jpg") no-repeat center center fixed;
     }
+
+    :host .canvas {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      transform: translateY(0) translateX(0);
+    }
   `],
   standalone: true,
   imports: [MobileComponent, AsyncPipe, OrderByIdPipe, FilterByGroupPipe, ListOfSkillsComponent, ListOfHeroesComponent],

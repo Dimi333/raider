@@ -138,26 +138,24 @@ import {GetValueDialogComponent} from "./shared/get-value-dialog/get-value-dialo
   ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild('templatePortalContentRaid') templatePortalContentRaid!: TemplateRef<unknown>;
-  @ViewChild('templatePortalContentHome') templatePortalContentHome!: TemplateRef<unknown>;
-  @ViewChild('templatePortalContentMarket') templatePortalContentMarket!: TemplateRef<unknown>;
-  @ViewChild('templatePortalContentAbout') templatePortalContentAbout!: TemplateRef<unknown>;
-  @ViewChild('templatePortalContentQuests') templatePortalContentQuests!: TemplateRef<unknown>;
+  @ViewChild('templatePortalContentRaid') templatePortalContentRaid!: TemplateRef<unknown>
+  @ViewChild('templatePortalContentHome') templatePortalContentHome!: TemplateRef<unknown>
+  @ViewChild('templatePortalContentMarket') templatePortalContentMarket!: TemplateRef<unknown>
+  @ViewChild('templatePortalContentAbout') templatePortalContentAbout!: TemplateRef<unknown>
+  @ViewChild('templatePortalContentQuests') templatePortalContentQuests!: TemplateRef<unknown>
 
-  heroService = inject(HeroService)
+  private dialogService: DialogService = inject(DialogService)
+  public heroService = inject(HeroService)
+  public selectedPortal!: Portal<any>;
 
-  templatePortalRaid!: TemplatePortal<unknown>;
-  templatePortalHome!: TemplatePortal<unknown>;
-  templatePortalMarket!: TemplatePortal<unknown>;
-  templatePortalAbout!: TemplatePortal<unknown>;
-  templatePortalQuests!: TemplatePortal<unknown>;
-  selectedPortal!: Portal<any>;
+  private templatePortalRaid!: TemplatePortal<unknown>;
+  private templatePortalHome!: TemplatePortal<unknown>;
+  private templatePortalMarket!: TemplatePortal<unknown>;
+  private templatePortalAbout!: TemplatePortal<unknown>;
+  private templatePortalQuests!: TemplatePortal<unknown>;
 
   constructor(
-    public js: JournalService,
     public dialog: MatDialog,
-    private dialogService: DialogService,
-    private hs: HeroService,
     private _viewContainerRef: ViewContainerRef,
     private router: Router,
     private pLocation: PlatformLocation,
@@ -219,30 +217,31 @@ export class AppComponent implements OnInit, AfterViewInit {
       const dat = JSON.parse(data)
       const heroes: MobileObject[] = []
       dat.forEach((d: {
-        id: string;
-        name: string;
-        race: Race;
-        occupation: Occupation;
-        image: string;
-        item: string;
-        item2: string;
-        level: number;
-        uc: number;
-        oc: number;
-        z: number;
-        maxz: number;
-        str: number;
-        dex: number;
-        con: number;
-        int: number;
-        char: number;
-        mana: number;
-        maxMana: number;
-        group: number;
-        xp: number;
-        age: number;
-        skill: string;
-        band: string;
+        id: string
+        name: string
+        race: Race
+        occupation: Occupation
+        image: string
+        item: string
+        item2: string
+        level: number
+        uc: number
+        oc: number
+        z: number
+        maxz: number
+        str: number
+        dex: number
+        con: number
+        int: number
+        char: number
+        mana: number
+        maxMana: number
+        group: number
+        xp: number
+        age: number
+        skill: string
+        band: string
+        price: number
       }) => heroes.push(this.heroService.createHero(d)))
 
       this.heroService.heroes = heroes

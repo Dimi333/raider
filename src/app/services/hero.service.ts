@@ -14,7 +14,7 @@ export const uuidv4 = () => {
 })
 export class HeroService {
   heroes: MobileObject[] = []
-  money: number = 0
+  money: number = 1000
   bands: { name: string, id: string, heroes: MobileObject[] }[] = [{name: "Hrdinovia", id: uuidv4(), heroes: []}]
 
   constructor() {
@@ -44,7 +44,8 @@ export class HeroService {
     xp: number,
     age: number,
     skill: string,
-    band: string
+    band: string,
+    price: number
   }): MobileObject {
     const {
       id,
@@ -70,9 +71,10 @@ export class HeroService {
       xp,
       age,
       skill,
-      band
+      band,
+      price
     } = recipe
-    return new MobileObject(id, name, race, occupation, image, item, item2, level, uc, oc, z, maxz, str, dex, con, int, char, mana, maxMana, group, xp, age, skill, band)
+    return new MobileObject(id, name, race, occupation, image, item, item2, level, uc, oc, z, maxz, str, dex, con, int, char, mana, maxMana, group, xp, age, skill, band, price)
   }
 
   getEnemy(level: number) {
@@ -101,7 +103,8 @@ export class HeroService {
      17 + (level * K10() + level),
      20,
      '',
-     ''
+     '',
+      30
     )
   }
 
@@ -132,7 +135,8 @@ export class HeroService {
      17 + (level * K10() + level + 500),
      20,
      '',
-     ''
+     '',
+      50
     )
 
   }
@@ -163,7 +167,9 @@ export class HeroService {
      0,
      20,
       this.getSkill(),
-     '')
+     '',
+      50
+    )
   }
 
   getSkill(): string | undefined {

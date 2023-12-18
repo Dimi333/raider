@@ -33,6 +33,15 @@ export class MobileObject {
   public _Money: number = 0
   private _LootMoney: number = 10
   private _Band: string
+  private _Price: number
+
+  get Price(): number {
+    return this._Price;
+  }
+
+  set Price(value: number) {
+    this._Price = value;
+  }
 
   get Band(): string {
     return this._Band;
@@ -157,7 +166,8 @@ export class MobileObject {
     XP: number,
     Age: number,
     Skill: string | undefined,
-    Band: string) {
+    Band: string,
+    Price: number) {
     // todo nezabudnúť updatnúť toJSON() a tie ostatné veci
     this._Race = race
     this._Occupation = occupation
@@ -183,6 +193,7 @@ export class MobileObject {
     this._Age = Age
     this._Skill = Skill
     this._Band = Band
+    this._Price = Price
   }
 
   // dať všetko z contructor a pri loade vytvoriť nové classy podľa toho
@@ -212,7 +223,8 @@ export class MobileObject {
       char: this._CHAR,
       age: this._Age,
       skill: this._Skill,
-      band: this._Band
+      band: this._Band,
+      price: this._Price
     }
   }
 

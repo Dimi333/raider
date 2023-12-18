@@ -8,10 +8,11 @@ import {MobileComponent} from '../shared/mobile/mobile.component';
   selector: 'app-market',
   template: `
       <div class="canvas">
-          @for (hero of showCase; track hero; let i = $index) {
-          <app-mobile [mob]="hero" (click)="buyHero(hero, i)"></app-mobile>
+          @for (hero of showCase;track hero;let i = $index) {
+              <app-mobile [mob]="hero" (click)="buyHero(hero, i)"></app-mobile>
           }
           <br class="clearer">
+          <button (click)="refreshMarket()">Obnoviť ♻</button>
       </div>
   `,
   styles: [`
@@ -39,10 +40,13 @@ export class MarketComponent {
   }
 
   buyHero(hero: MobileObject, index: number) {
-    this.showCase.splice(index, 1)
-    hero.Band = this.hs.bands[0].id
-    this.hs.bands[0].heroes.push(hero)
-    this.hs.heroes.push(hero)
+    if (this.hs.money >= hero.Price) {
+      this.showCase.splice(index, 1)
+      hero.Band = this.hs.bands[0].id
+      this.hs.bands[0].heroes.push(hero)
+      this.hs.heroes.push(hero)
+      this.hs.money -= hero.Price
+    }
   }
 
   refreshMarket() {

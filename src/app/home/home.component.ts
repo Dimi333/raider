@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
   template: `
       <div class="canvas">
             <div>
-            <button (click)="addBand()">Pridať skupinu +👥</button>
+            <!--button (click)="addBand()">Pridať skupinu +👥</button-->
             </div>
             @for (band of heroService.bands; track band.name) {
               <div class="box" style="border: 10px groove darkgoldenrod; background: #261305;">
