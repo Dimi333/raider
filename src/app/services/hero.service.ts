@@ -166,12 +166,12 @@ export class HeroService {
      '')
   }
 
-  getSkill(): string | null {
-    let skill: string | null;
+  getSkill(): string | undefined {
+    let skill: string | undefined;
 
     if (K100() < 20) skill = 'HealingSkill'
     else if (K100() < 10) skill = 'LightningSkill'
-    else skill = null
+    else skill = undefined
 
     return skill;
   }

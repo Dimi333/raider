@@ -7,7 +7,7 @@ import {HeroService} from "../../services/hero.service";
   standalone: true,
   imports: [CommonModule],
   template: `
-      @for (skill of skills;let index = $index; track skill) {
+      @for (skill of skills;let index = $index;track index) {
           @if (skill) {
               <button (click)="useSkill(skill)" [class]="{'selected': waitingSkill === skill}">
                   {{ GetCharacter(index) + " | " + skill }}
@@ -22,22 +22,22 @@ import {HeroService} from "../../services/hero.service";
 export class ListOfSkillsComponent {
   private _hs: HeroService = inject(HeroService);
 
-  public waitingSkill = ""
+  public waitingSkill: string | undefined = ""
 
   @HostListener('window:keydown.Q', ['$event'])
   heal(event: KeyboardEvent) {
-    this.usingSkill.emit('HealingSkill')
-    this.waitingSkill = 'HealingSkill'
+    this.usingSkill.emit(this.skills[0])
+    this.waitingSkill = this.skills[0]
   }
 
   @HostListener('window:keydown.W', ['$event'])
   lightning(event: KeyboardEvent) {
-    this.usingSkill.emit('LightningSkill')
-    this.waitingSkill = 'LightningSkill'
+    this.usingSkill.emit(this.skills[1])
+    this.waitingSkill = this.skills[1]
   }
 
   @Output() usingSkill: EventEmitter<string> = new EventEmitter<string>();
-  public skills: (string | null)[] = this._hs.heroes.map(hero => hero.Skill)
+  public skills: (string | undefined)[] = this._hs.heroes.map(hero => hero.Skill)
 
   GetCharacter(index: number): string {
     switch (index) {

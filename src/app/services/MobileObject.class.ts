@@ -29,7 +29,7 @@ export class MobileObject {
   private _CON: number
   private _INT: number
   private _CHAR: number
-  private _Skill: string | null
+  private _Skill: string | undefined
   public _Money: number = 0
   private _LootMoney: number = 10
   private _Band: string
@@ -50,11 +50,11 @@ export class MobileObject {
     return this._LootMoney;
   }
 
-  get Skill(): string | null {
+  get Skill(): string | undefined {
     return this._Skill;
   }
 
-  set Skill(value: string | null) {
+  set Skill(value: string | undefined) {
     this._Skill = value;
   }
 
@@ -156,7 +156,7 @@ export class MobileObject {
     Group: number,
     XP: number,
     Age: number,
-    Skill: string | null,
+    Skill: string | undefined,
     Band: string) {
     // todo nezabudnúť updatnúť toJSON() a tie ostatné veci
     this._Race = race
